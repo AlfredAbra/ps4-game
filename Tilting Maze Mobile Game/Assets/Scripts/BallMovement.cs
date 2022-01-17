@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.PS4;
 
 public class BallMovement : MonoBehaviour
 {
@@ -17,22 +18,36 @@ public class BallMovement : MonoBehaviour
 
     public AudioClip ballExplosionSound;
 
+    public float sensH = 10;
+    public float sensV = 10;
+    public float speed;
+
+    public int playerId;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
         soundEffects = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // The acceleration.y variable is used within the z-axis part of the Vector3 variable so it matches the phone's tilt correctly (so if the phone is tilted forward it moves on te z-axis in the game scene).
-        Vector3 ballTilt = new Vector3 (Input.acceleration.x, 0f, Input.acceleration.y);
+        if (PS4Input.PadIsConnected(playerId)) 
+        {
+            //Movement
+            Vector4 v = PS4Input.PadGetLastOrientation(0);
+
+            float moveHor = Mathf.Clamp(v.z * sensH, -1, 1);
+            float moveVer = Mathf.Clamp(v.x * sensV, -1, 1);
+            rb.AddForce(new Vector3(-moveHor, 0, -moveVer) * speed * Time.deltaTime);
+        }
+            // The acceleration.y variable is used within the z-axis part of the Vector3 variable so it matches the phone's tilt correctly (so if the phone is tilted forward it moves on te z-axis in the game scene).
+            //Vector3 ballTilt = new Vector3 (Input.acceleration.x, 0f, Input.acceleration.y);
 
         // This adds the velocity to the ball game object and also uses the ballSpeed value as well to move at a certain speed.
-        rb.velocity = ballTilt * ballSpeed;
+        //rb.velocity = ballTilt * ballSpeed;
 
         // This moves the ball back to original start position if the player falls off the narrow bridge sections.
         if(ball.transform.position.y < -0.31f)
