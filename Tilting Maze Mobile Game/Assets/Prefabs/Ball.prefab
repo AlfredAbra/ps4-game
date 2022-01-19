@@ -132,9 +132,9 @@ MonoBehaviour:
   soundEffects: {fileID: 7309154450567679096}
   spikeImpactSound: {fileID: 8300000, guid: 805eb3a774cabea48a9b323e2b910a4f, type: 3}
   ballExplosionSound: {fileID: 8300000, guid: 330198cd28f718943b9e25bddbc5819a, type: 3}
-  sensH: 10
-  sensV: 10
-  speed: 30
+  sensH: 5
+  sensV: 5
+  speed: 30000
   playerId: 0
 --- !u!82 &7309154450567679096
 AudioSource:
