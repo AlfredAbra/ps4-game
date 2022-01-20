@@ -3009,6 +3009,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit
       objectReference: {fileID: 0}
+    - target: {fileID: 3218602511177275701, guid: ddd22d285ba1fcf409d26bd54d9922da,
+        type: 3}
+      propertyPath: m_TagString
+      value: Exit4
+      objectReference: {fileID: 0}
     - target: {fileID: 8654929044863477801, guid: ddd22d285ba1fcf409d26bd54d9922da,
         type: 3}
       propertyPath: m_Pivot.x

@@ -9,6 +9,11 @@ TagManager:
   - Spikes
   - Spike
   - Exit
+  - Ball
+  - Exit2
+  - Exit3
+  - Exit4
+  - Exit5
   layers:
   - Default
   - TransparentFX

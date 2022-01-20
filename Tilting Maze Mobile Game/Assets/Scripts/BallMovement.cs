@@ -76,15 +76,35 @@ public class BallMovement : MonoBehaviour
         if (collision.gameObject.tag == "Spikes")
         {
             soundEffects.PlayOneShot(spikeImpactSound,0.75f);
+
             PS4Input.PadSetVibration(playerId, 255, 255);
             ball.transform.position = new Vector3(0.418107271f, 1f, 0.0181865692f);
         }
 
         if (collision.gameObject.tag == "Exit")
         {
-            SceneManager.LoadScene("LevelCompletionScreen");
+            SceneManager.LoadScene("Level2");
         }
 
+        if (collision.gameObject.tag == "Exit2")
+        {
+            SceneManager.LoadScene("Level3");
+        }
+
+        if (collision.gameObject.tag == "Exit3")
+        {
+            SceneManager.LoadScene("Level4");
+        }
+
+        if (collision.gameObject.tag == "Exit4")
+        {
+            SceneManager.LoadScene("Level5");
+        }
+
+        if(collision.gameObject.tag == "Exit5")
+        {
+            SceneManager.LoadScene("LevelCompletionScreen");
+        }
     }
 
     void OnCollisionExit(Collision collision)

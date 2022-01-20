@@ -8,7 +8,7 @@ public class LevelComplete : MonoBehaviour
 
     public void LevelMenu()
     {
-        SceneManager.LoadScene("LevelMenu");
+        SceneManager.LoadScene("LevelCompletionScreen");
     }
 
     public void Quit()
