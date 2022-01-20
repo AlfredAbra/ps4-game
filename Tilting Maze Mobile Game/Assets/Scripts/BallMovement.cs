@@ -24,6 +24,7 @@ public class BallMovement : MonoBehaviour
 
     public int playerId;
 
+    float colortimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +45,7 @@ public class BallMovement : MonoBehaviour
             //Movement
             Vector4 v = PS4Input.PadGetLastOrientation(0);
             // The acceleration.y variable is used within the z-axis part of the Vector3 variable so it matches the phone's tilt correctly (so if the phone is tilted forward it moves on te z-axis in the game scene).
-            Vector3 ballTilt = new Vector3(-v.z, 0f, v.x);
+            Vector3 ballTilt = new Vector3(-v.z, 0f, -v.x);
 
             // This adds the velocity to the ball game object and also uses the ballSpeed value as well to move at a certain speed.
             rb.velocity = ballTilt * ballSpeed;
@@ -58,6 +59,14 @@ public class BallMovement : MonoBehaviour
             }
         }
 
+        if (colortimer > 0)
+        {
+            colortimer--;
+        }
+        else 
+        {
+            ChangeColour(Color.magenta);
+        }
     }
 
     private void FixedUpdate()
@@ -75,8 +84,10 @@ public class BallMovement : MonoBehaviour
 
         if (collision.gameObject.tag == "Spikes")
         {
+            Color DeathColor = Color.red;
+            ChangeColour(DeathColor);
             soundEffects.PlayOneShot(spikeImpactSound,0.75f);
-
+            colortimer = 100f;
             PS4Input.PadSetVibration(playerId, 255, 255);
             ball.transform.position = new Vector3(0.418107271f, 1f, 0.0181865692f);
         }
@@ -114,5 +125,14 @@ public class BallMovement : MonoBehaviour
             ballSpeed = 15f;
         }
 
+    }
+
+    void ChangeColour(Color color) 
+    {
+
+        PS4Input.PadSetLightBar(playerId,
+            Mathf.RoundToInt(color.r * 255),
+            Mathf.RoundToInt(color.g * 255),
+            Mathf.RoundToInt(color.b * 255));
     }
 }
