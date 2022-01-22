@@ -42,9 +42,9 @@ public class BallMovement : MonoBehaviour
             if (Input.GetKey(code))
                 PS4Input.PadResetOrientation(playerId);
 
-            //Movement
+            //Get Motion sensors of controlers
             Vector4 v = PS4Input.PadGetLastOrientation(0);
-            // The acceleration.y variable is used within the z-axis part of the Vector3 variable so it matches the phone's tilt correctly (so if the phone is tilted forward it moves on te z-axis in the game scene).
+            // Ball will move depending on the gyro of controller
             Vector3 ballTilt = new Vector3(-v.z, 0f, -v.x);
 
             // This adds the velocity to the ball game object and also uses the ballSpeed value as well to move at a certain speed.
@@ -84,10 +84,12 @@ public class BallMovement : MonoBehaviour
 
         if (collision.gameObject.tag == "Spikes")
         {
+            //Change PS Controller colour
             Color DeathColor = Color.red;
             ChangeColour(DeathColor);
             soundEffects.PlayOneShot(spikeImpactSound,0.75f);
             colortimer = 100f;
+            //PS Vibration
             PS4Input.PadSetVibration(playerId, 255, 255);
             ball.transform.position = new Vector3(0.418107271f, 1f, 0.0181865692f);
         }
